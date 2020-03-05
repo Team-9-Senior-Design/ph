@@ -1,6 +1,7 @@
 body {
 	margin:0px;
 	background-color:#03244d;
+	z-index: -5;
 }
 
 
@@ -146,35 +147,7 @@ body {
 	border: 2px solid #ee7700;
 	text-align: center;
 }
-#loginPr {
-	width: 370px;
-	height: 430px;
-	margin-top: -100px;
-	left: 100px;
-	background-color: #496e9c;
-	position: absolute;
-	border-radius: 15px;
-	border: 1px solid white;
-	text-align: center;
-	color:white;
-	overflow:hidden;
 
-}
-
-#loginPr2 {
-	width: 370px;
-	height: 430px;
-	margin-top: -100px;
-	right: 100px;
-	background-color: #496e9c;
-	position: absolute;
-	border-radius: 15px;
-	border: 1px solid white;
-	text-align: center;
-	color:white;
-	
-
-}
 
 a.button {
     -webkit-appearance: button;

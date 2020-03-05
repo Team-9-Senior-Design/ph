@@ -104,10 +104,30 @@
 		var p = eval('<?php echo json_encode($apassword);?>');
 		var r = eval('<?php echo json_encode($arole);?>');
 		var i = u.indexOf(userName);
-		if (u.indexOf(userName) != -1 && p.indexOf(userPass) != -1) {
-			window.document.f.action="preSecond.html";
-			window.document.f.submit();
+		if (u.indexOf(userName) != -1) {
+				var position = u.indexOf(userName);
+
+			if (p[position] == userPass) {
+
+				if (r[position] == "yes") {
+					window.document.f.action="admin.php";
+					window.document.f.submit();
+				}
+				else {
+
+					window.document.f.action="preSecond.html";
+					window.document.f.submit();
+				}
+
+			}
+			else{ 
+				alert("passwrod is error")
+				return false;
+			};
 		} 
+
+
+
 		else if (userName == "" || userName == null) {
 			alert("usename is emplty");
 			return false;
@@ -116,14 +136,17 @@
 			alert("password is emplty");
 			return false;
 		} 
-		else if (u.indexOf(userName) == -1 || p.indexOf(userPass) == -1) {
-			alert("usename or password is error");
-			return false;
-		} 
 		else{
-			return true;
+			alert("username is error");
+			return false;
 		}
 	}
+
+
+
+
+
+
 	function signUp(){
 			window.location.href = 'signUp.html';
 		}
