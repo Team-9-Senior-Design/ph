@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/s.css" media="screen" />
+	<style type="text/css">
+	body,html {padding:0; margin:0;width: 100%; height: 100%;
+	} 
+	</style>
+	<title>simulation</title>
+</head>
+<body onload="asd()">
+	<div class="top">
+        <img src="img/logi.jpeg" id= "img" alt="top" width="250" height="60">
+    </div> 
+    <div id="sub" class="time">00:30:00</div>
+    <div class = "box">
+        <div class="text">
+        PMH: Type 2 DM x 5 years, HFrEF (EF 35%, NYHA II) x 2 years,
+        <br> HTN x 18 years, MDD x 1 year, obesity<br><br>
+
+        SH:     Tobacco = + (5 cigarettes/day)      Alcohol =      Illicit Drugs = <br>
+        Diet: Usually eats 2 meals a day, relies on fast food a few times per week due to cost<br>
+        Exercise: Walks 20 minutes 3 days a week at the closet mall<br><br>  
+
+        Allergies/Intolerances:  NKDA<br>
+        Current Meds: metformin 1000 mg po BID, pioglitazone 30 mg po daily, ramipril 10 mg po daily,<br>
+        carvedilol 25 mg po BID, spironolactone 25 mg po daily, furosemide 20 mg po daily PRN, aspirin 81 mg<br>
+        po daily, atorvastatin 80 mg po daily, escitalopram 20 mg po daily<br>
+        Vaccine history:    Childhood vaccines up-to-date<br>
+        Influenza (1 year ago)<br><br>
+
+        Significant vitals and labs:<br>  
+        Date    Today<br>
+        BP  144/86 mm Hg<br>
+        HR  82 bpm<br>
+        Wt  232 lbs<br>
+        Ht  6’<br>
+        BMI 31.5 kg/m2<br><br>
+
+        Today:  POC A1c 8.7% (eAG = 203 mg/dL)<br>
+        </div>
+
+        <div class="text2">
+           You order Jardiance for<br>
+           Danny,but it will take 4-6<br>
+           weeks for it arrive. What<br>
+           would you recommend for <br>
+           Danny in the meantime?
+        </div>
+    </div>
+
+    <div class="bottom" align="center">
+    <form>
+    <input type="button" value="option" onclick="msg()" 
+            style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px">
+    <input type="button" value="option2" onclick="msg()"
+            style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px; margin-right: 20px; margin-left: 20px">
+    <input type="button" value="option3" onclick="msg()"
+            style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px;">
+    </form>	
+    </div>
+</body>
+</html>
+<script>
+function msg() {
+  alert("Hello world!");
+}
+
+function asd(){
+    var sub=document.getElementById("sub");          
+    var time=1800;//30分钟换算成1800秒
+
+    setInterval(function(){
+        time=time-1;
+        var minute=parseInt(time/60);
+        var second=parseInt(time%60);
+        sub.innerHTML= '00:'+minute+':'+toDub(second);
+    
+    },1000);
+
+}
+
+function toDub(n){
+    return n<10?"0"+n:""+n;
+}
+ 
+</script>
