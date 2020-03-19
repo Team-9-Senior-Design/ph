@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/adminn.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/admin.css" media="screen" />
 	
 	<script src="myjs.js"></script>
 
