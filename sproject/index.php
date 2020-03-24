@@ -21,6 +21,7 @@
 		  $arole[] = $rows['role'];
 		}  
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,27 +37,28 @@
 </head>
 <body>
 	<thead>
-	<div class="top" style="min-width: 900px">
-		<img src="img/logi.jpeg" id= "img" alt="top" width="250" height="60">
+	<div class="top" style="min-width: 900px; padding-top: 10px;">
+		<img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50">
 	</div>
 	</thead> 
 	<tbody>
 	<div class="bg" style="min-width: 900px">
 		<form name="f" action="">
 
-			<div id="login12">
-				<h1><br>IDENTITY LIFE</h1>
+			<div id="login12" style="min-width: 450px; padding-top: 10px; padding-right: 10px;
+				padding-left: 10px; padding-bottom: 10px;">
+				<h1><br>Welcome to the PhAHD Simulation!</h1>
 				<p> <br>
-					This simulation will interactively walk 
-					students through patient scenarios to present 
-					common barriers patients face and the implications 
-					on their health and ability to care for themselves. 
-					The students will be required to make decisions 
-					throughout the simulation that affect their progress 
-					through the simulation. This will help equip students
-					 to identify and utilize resources to overcome 
-					these barriers and develop patient-specific treatment 
-					or self-management recommendations.</p>
+				This simulation exercise focuses on preparing you to address common barriers
+				patients vulnerable to health disparities face in our current healthcare system.
+				Pharmacists frequently care for indigent and underserved patients or those of low
+				socioeconomic status. To prepare for the role of the pharmacist, you need exposure
+				to the challenges these patients face and how they affect their health, knowledge
+				on available health and medication resources, and equipped with strategies to help
+				overcome barriers and achieve optimal patient outcomes, with the ultimate goal to
+				reduce health disparities. Within this simulation, you will navigate a variety of
+				patient cases and explore clinical strategies to address barriers and challenges 
+				and reduce health disparities in the primary care setting.</p>
 			</div>
 
 

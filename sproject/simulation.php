@@ -7,7 +7,6 @@
     }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +19,8 @@
 	<title>simulation</title>
 </head>
 <body onload="asd()">
-	<div class="top">
-        <img src="img/logi.jpeg" id= "img" alt="top" width="250" height="60">
+	<div class="top" style="min-width: 900px; padding-top: 10px;">
+        <img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50">
     </div> 
     <div id="sub" class="time">00:30:00</div>
     <div class = "box">
