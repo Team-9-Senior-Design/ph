@@ -5,10 +5,6 @@
 	while ($rows= $d->fetch_assoc()) {
 		$rowss[] = $rows;
 	}
-	
-
-
-
 ?>
 
 

@@ -3,7 +3,10 @@
 		$sfname = $_POST['fullName'];
 		$suname = $_POST['userName'];
 		$spassword = $_POST['passWord'];
-		$sql = "INSERT INTO login (usename, password, fullname) values ('{$suname}', '{$spassword}', '{$sfname}')";	
+		$role = 'no';
+		$score = 0;
+		$progress = 'Incomplete';
+		$sql = "INSERT INTO login (usename, password, fullname, role, score,  progress) values ('{$suname}', '{$spassword}', '{$sfname}', '{$role}', '{$score}', '{$progress}')";	
 		$conn->query($sql);
 
 		$url = "index.php";

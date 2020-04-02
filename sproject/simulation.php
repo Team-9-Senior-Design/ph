@@ -1,11 +1,28 @@
 <?php
     include 'connect.php';
     $d = $conn->query("SELECT * FROM `question`");
+    $s1 = $conn->query("SELECT s1 FROM score");
+    $s2 = $conn->query("SELECT s2 FROM score");
+    $s3 = $conn->query("SELECT s3 FROM score");
 
     while ($rows= $d->fetch_assoc()) {
         $rowss[] = $rows;
     }
+
+    while ($rows= $s1->fetch_assoc()) {
+        $row1[] = $rows;
+    }
+
+    while ($rows= $s2->fetch_assoc()) {
+        $row2[] = $rows;
+    }
+
+    while ($rows= $s3->fetch_assoc()) {
+        $row3[] = $rows;
+    }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -16,11 +33,12 @@
 	body,html {padding:0; margin:0;width: 100%; height: 100%;
 	} 
 	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<title>simulation</title>
 </head>
 <body onload="asd()">
 	<div class="top" style="min-width: 900px; padding-top: 10px;">
-        <img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50">
+        <a href="preSecond.php"><img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50"></a>
     </div> 
     <div id="sub" class="time">00:30:00</div>
     <div class = "box">
@@ -48,26 +66,36 @@
         <div id="q" class="zxc1" align="center"> 
         </div>
     </div>
-    <div method="post" align="center" class="button">
+    <div align="center" class="button">
         <form name="f" action="">
         <div>
         <input type="button" id="a1" onclick="c1()" value="" 
                 style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px"></div>
         <div>
         <input type="button" id="a2" onclick="c2()" value=""
-                style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px; margin-right: 20px; margin-left: 20px"></div>
+                style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px;
+                    "></div>
         <div>
-        <input type="button" id="a3" onclick="c3()" value=""
-                style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px;"></div>
+        <input type="button" id="a3" onclick="c3()" value="" 
+                style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px; "></div>
         </form> 
     </div>
-
     
 </body>
 </html>
-<script>
-    var r = eval('<?php echo json_encode($rowss);?>');
 
+
+<script>
+	//get userName
+	var userName = sessionStorage.getItem('username');
+	//this is score
+	var s = 0;
+	// get the row of questions and answer
+    var r = eval('<?php echo json_encode($rowss);?>');
+    //get the score table from database
+    var s1 = eval('<?php echo json_encode($row1);?>');
+    var s2 = eval('<?php echo json_encode($row2);?>');
+    var s3 = eval('<?php echo json_encode($row3);?>');
 
     var qq = document.getElementById("q");
     qq.innerHTML = r[0].q;
@@ -81,50 +109,153 @@
     var aa3 = document.getElementById("a3");
     aa3.value = r[0].a3;
 
-    var a1n = r[0].a1;
-    var a2n = r[0].a2;
-    var a3n = r[0].a3;
+    var a1n = r[0].a1n;
+    var a2n = r[0].a2n;
+    var a3n = r[0].a3n;
     var id = 0;
-
+    //reaction for button
     function c1() {
         var a1 = document.getElementById("a1").value;
-        if (a1 = r[id].a1) {
+        
+        //calculate the score
+        if (s1.indexOf(a1) == -1) {
+        	s = s + 10;
+        }
+
+        if (s2.indexOf(a1) != -1) {
+        	s = s - 5;
+        }
+
+        if (s3.indexOf(a1) != -1) {
+        	s = s + 20;
+        }
+
+        // stop the simulation
+        if (r[id].a1n == 1111) {
+        		alert("the simulation is end");
+        		
+        		post('save2.php', {username:userName, score:s, progress:'complete'});
+        	}
+        // set the next question and answer
+        if (a1 == r[id].a1) {
             id = r[id].a1n -1;
             qq.innerHTML = r[id].q;
             aa1.value = r[id].a1;
-            aa2.value = r[id].a2;
-            aa3.value = r[id].a3;
+        
+            if (r[id].a2.length > 0) {
+                aa2.value = r[id].a2;
+                $("#a2").show();
+            }
+            else {
+               $("#a2").hide(); 
+            }
+            
+            if (r[id].a3.length > 0) {
+                aa3.value = r[id].a3;
+                $("#a3").show();
+            }
+            else {
+               $("#a3").hide(); 
+            }
+
         }
 
     }
 
     function c2() {
         var a2 = document.getElementById("a2").value;
-        if (a2 = r[id].a2) {
+        
+        //calculate the score
+        if (s1.indexOf(a1) == -1) {
+            s = s + 10;
+        }
+
+        if (s2.indexOf(a1) != -1) {
+            s = s - 5;
+        }
+
+        if (s3.indexOf(a1) != -1) {
+            s = s + 20;
+        }
+
+        // stop the simulation
+        if (r[id].a2n == 1111) {
+                alert("the simulation is end");
+                
+                post('save2.php', {username:userName, score:s, progress:'complete'});
+            }
+        // set the next question and answer
+        if (a2 == r[id].a2) {
             id = r[id].a2n -1;
             qq.innerHTML = r[id].q;
             aa1.value = r[id].a1;
-            aa2.value = r[id].a2;
-            aa3.value = r[id].a3;
+            
+            if (r[id].a2.length > 0) {
+                aa2.value = r[id].a2;
+                $("#a2").show();
+            }
+            else {
+               $("#a2").hide(); 
+            }
+            
+            if (r[id].a3.length > 0) {
+                aa3.value = r[id].a3;
+                $("#a3").show();
+            }
+            else {
+               $("#a3").hide(); 
+            }
+
         }
 
     }
 
     function c3() {
         var a3 = document.getElementById("a3").value;
-        if (a3 = r[id].a3) {
+        //calculate the score
+        if (s1.indexOf(a3) != -1) {
+        	s = s + 10;
+        }
+
+        if (s2.indexOf(a3) != -1) {
+        	s = s - 5;
+        }
+
+        if (s3.indexOf(a3) != -1) {
+        	s = s + 20;
+        }
+
+        if (r[id].a3n == 1111) {
+        		alert("the simulation is end");
+        		post('save2.php', {username:userName, score:s, progress:'complete'});
+
+        		
+        	}
+        if (a3 == r[id].a3) {
             id = r[id].a3n -1;
             qq.innerHTML = r[id].q;
             aa1.value = r[id].a1;
-            aa2.value = r[id].a2;
-            aa3.value = r[id].a3;
+            if (r[id].a2.length > 0) {
+                aa2.value = r[id].a2;
+                $("#a2").show();
+            }
+            else {
+               $("#a2").hide(); 
+            }
+            
+            if (r[id].a3.length > 0) {
+                aa3.value = r[id].a3;
+                $("#a3").show();
+            }
+            else {
+               $("#a3").hide(); 
+            }
         }
 
     }
 
-    function asd(){
-                  
-        var time=100;
+    function asd(){   
+        var time=1800;
         setInterval(function(){
             if (time > 0) {
             time=time-1;
@@ -134,8 +265,7 @@
 
             else {
                 alert("the simulation is end");
-                window.document.f.action="preSecond.html";
-                window.document.f.submit();  
+                post('save2.php', {username:userName, score:s, progress:'incomplete'}); 
             }
         },1000);
         
@@ -148,8 +278,27 @@
         return n<10?"0"+n:""+n;
     }
 
+
     
+	function post(URL, PARAMS) {
+        var temp = document.createElement('form')
+        temp.action = URL
+        temp.method = 'post'
+        temp.style.display = 'none'
+        for (var x in PARAMS) {
+          var opt = document.createElement('textarea')
+          opt.name = x
+          opt.value = PARAMS[x]
+          // alert(opt.name)
+          temp.appendChild(opt)
+        }
+        document.body.appendChild(temp)
+        temp.submit()
+        document.body.removeChild(temp)
+        return temp
+ 	}
+
+
 
 
 </script>
-

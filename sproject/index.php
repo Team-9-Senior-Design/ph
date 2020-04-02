@@ -21,7 +21,6 @@
 		  $arole[] = $rows['role'];
 		}  
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +39,7 @@
 	<div class="top" style="min-width: 900px; padding-top: 10px;">
 		<img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50">
 	</div>
-	</thead> 
+	</thead>  
 	<tbody>
 	<div class="bg" style="min-width: 900px">
 		<form name="f" action="">
@@ -116,8 +115,10 @@
 					window.document.f.submit();
 				}
 				else {
+					sessionStorage.setItem('username', userName);
+					sessionStorage.setItem('passwrod', userPass);
 
-					window.document.f.action="preSecond.html";
+					window.document.f.action="preSecond.php";
 					window.document.f.submit();
 				}
 
