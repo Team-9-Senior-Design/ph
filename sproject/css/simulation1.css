@@ -39,7 +39,7 @@ body {
   width: auto;
   min-width: 650px;
   height: 750px;
-  min-height: 500px;
+  min-height: 600px;
   background-color: #496e9c;
   clear: left;
   z-index: 2;
@@ -62,11 +62,6 @@ body {
 
 
 
-.time {
-
-  background-color: white;
-}
-
 .zxc{
   font-weight:bold;
   font-size: 20px;
@@ -77,5 +72,32 @@ body {
   font-weight:bold;
   font-size: 20px;
   color: white;
+  overflow: auto;
 }
 
+.myButton {
+  box-shadow:inset 0px 0px 15px 3px #23395e;
+  background:linear-gradient(to bottom, #96b4e6 5%, #3771e6 100%);
+  background-color:#96b4e6;
+  border-radius:17px;
+  border:1px solid #b2c2db;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  padding:6px 13px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #979db0;
+  z-index: 3;
+  min-width: 950px;
+  position: relative;
+}
+.myButton:hover {
+  background:linear-gradient(to bottom, #3771e6 5%, #96b4e6 100%);
+  background-color:#3771e6;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
