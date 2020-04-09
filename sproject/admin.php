@@ -12,7 +12,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/admin1.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/admin.css" media="screen" />
 	
 	<script src="myjs.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -59,11 +59,11 @@
                     }   
                     ?>
                 </select> <br><br><br>
-                <button type="submit" id="b" onclick="asd()">submit</button>
+                <button type="submit" id="b" onclick="asd()" style="margin-top: 50%">submit</button>
             </div>
 
-            <div align="center" style="margin-top: 250px;" >
-                <button type="submit" class="b" onclick="edit()" style="background: #ee7700; color: white">
+            <div align="center" style="margin-top: 60px;" >
+                <button type="submit" class="b" onclick="edit()" style="background: #ee7700; color: white;">
                     EDIT QUESTION
                 </button>
             </div>
@@ -76,18 +76,17 @@
     <div id="light" class="white_content" align="center">
             <table>
                 <tr>
-                <th>fullname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>score&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>progress&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 </tr>
 
                 <tr>
-                <td id="t1"></td>
+                
                 <td id="t2"></td>
                 <td id="t3"></td>
                 </tr>
             </table> 
-            <a href = "javascript:void(0)" onclick = "closeDialog()">close</a>
+            <a href = "javascript:void(0)" style="color: white" onclick = "closeDialog()">close</a>
         </div> 
         <div id="fade" class="black_overlay"></div> 
     <script type="text/javascript">
@@ -98,7 +97,7 @@
             var rn = getParamValues('fullname', r);
             var a = $('#news option:selected').text();
             var n = rn.indexOf(a);
-            t1.innerText = r[n].fullname;
+            
             t2.innerText = r[n].score;
             t3.innerText = r[n].progress;
             

@@ -1,7 +1,6 @@
 <?php
     include 'connect.php';
-    $d = $conn->query("SELECT fullname, score FROM login WHERE role = 'no'");
-    $dd = $conn->query("SELECT fullname, progress FROM login WHERE role = 'no'");
+    $d = $conn->query("SELECT fullname, score, progress FROM login WHERE role = 'no'");
 
 ?>
 
@@ -10,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/pres.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/pres1.css" media="screen" />
 	<script src="myjs.js"></script>
 
 
@@ -31,13 +30,14 @@
 
 		<div id="loginPr" >
 			<div class="loginTipPr"> 
-				<p1>Scenario Score</p1>
+				<p1>Scenario</p1>
 			</div>
 			<div>
 				<table class = "table" align="center">
 					<tr>
 					<th>Name</th>
 					<th>score</th>
+					<th>progress</th>
 					</tr>
 					<?php
 					if ($d->num_rows > 0) {
@@ -45,6 +45,7 @@
 	                		echo "<tr>";
 	                		echo "<td>" . $result["fullname"] . "</td>";
 	                		echo "<td>" . $result["score"] . "</td>";
+	                		echo "<td>" . $result["progress"] . "</td>";
 	                		echo "</tr>";
 
 	                	}
@@ -55,33 +56,9 @@
 			</div>
 		</div>
 
-		<div id="loginPr2" >
-			<div class="loginTipPr"> 
-				<p1>Scenario's Progress</p1>
-			</div>
-
-			<table class = "table" align="center" >
-					<tr>
-					<th>Name</th>
-					<th>progress</th>
-					</tr>
-
-					<?php
-					if ($dd->num_rows > 0) {
-	                	while ($result= $dd->fetch_assoc()) {
-	                		echo "<tr>";
-	                		echo "<td>" . $result["fullname"] . "</td>";
-	                		echo "<td>" . $result["progress"] . "</td>";
-	                		echo "</tr>";
-
-	                	}
-	                }	
-                	?>
-					
-			</table>
-		</div>
-
-		<a href="secondPage.html" class="button">begin the simulation</a>
+		
+		<div><a href="secondPage.html" class="button">begin the simulation</a></div>
+		
 	</div>
 	</tbody>
 

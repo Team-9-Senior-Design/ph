@@ -17,10 +17,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/admin1.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/admin.css" media="screen" />
 	<style type="text/css">
 		body,html {padding:0; margin:0;width: 100%; height: 100%; color: white;
 	}
+
+	.edit1{
+		background: #496e9c;
+		border: 1px solid white; 
+	    border-radius: 20px;
+	    width: 1000px;
+	    height: 500px;
+	    margin-top: 120px; 
+	    margin-left: auto;
+	    margin-right: auto;
+	    overflow: auto;
+
+	}
+
+    ::-webkit-scrollbar{
+display:none;
+}
+
 	</style>
 
 	<title>edit</title>
@@ -31,9 +49,9 @@
         <a href="index.php"><img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50" style="margin-top: 10px"></a>
     </div> 
     </thead>
-    <div class="edit1">
-	<div id="Cusmoters" class="tabcontent">
-		<table border="1" style="margin:auto; border: white">
+    <div class="">
+	<div id="Cusmoters" class="edit1">
+		<table border="1" style="margin-top:10px;margin-right: 10px; margin-left: 10px; border: white">
 		
 				<tr>
 					<th>id</th>
@@ -63,19 +81,20 @@
 
 	<div align="center">
 		<form name="f" action="">
-		<label>ID:&nbsp;&nbsp;&nbsp;</label><input type="textarea" name="" id="id">
+		<label>ID:&nbsp;&nbsp;&nbsp;</label><input type="text" name="" id="id" style="margin-bottom: 10px;margin-top: 10px;">
 
 		<input type="button" id="b1" value="search" onclick="search()"><br>
 
-		<label>question:&nbsp;&nbsp;&nbsp;</label><input type="text" value="" id="q"> <br>
+		<label>question:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="q"  rows="4" cols="50" > </textarea> <br>
 
-		<label>answer1:&nbsp;&nbsp;&nbsp;</label><input type="text" value="" id="a1"> <br>
+
+		<label>answer1:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a1"  rows="4" cols="50" > </textarea> <br>
 		
-		<label>answer2:&nbsp;&nbsp;&nbsp;</label><input type="text" value="" id="a2"> <br>
+		<label>answer2:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a2"  rows="4" cols="50" > </textarea> <br>
 		
-		<label>answer3:&nbsp;&nbsp;&nbsp;</label><input type="text" value="" id="a3"> <br>
+		<label>answer3:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a3"  rows="4" cols="50" > </textarea> <br>
 		
-		<label>answer4:&nbsp;&nbsp;&nbsp;</label><input type="text" value="" id="a4"> <br>
+		<label>answer4:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a4"  rows="4" cols="50" > </textarea> <br>
 		
 
 
@@ -209,4 +228,7 @@
         return temp
  	}
 
+ 	
+
+ 	
 </script>
