@@ -32,6 +32,28 @@
 	<style type="text/css">
 	body,html {padding:0; margin:0;width: 100%; height: 100%;
 	} 
+    .time{
+        background: #496e9c;
+        color:#ffffff;
+        overflow: hidden;
+        z-index: 9999;
+        position: fixed;
+        padding:5px;
+        text-align:center;
+        width: 175px;
+        height: 22px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        }
+    .time.right_top{
+        right: 10px;
+        top: 10px;
+        }
+
+
+
 	</style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<title>simulation</title>
@@ -75,9 +97,8 @@
         <input type="button" id="a2" onclick="c2()" value=""
                 style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px;
                     "></div>
-        <div>
-        <input type="button" id="a3" onclick="c3()" value="" 
-                style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px; "></div>
+        <div >
+        <input type="button" id="a3" onclick="c3()" value="" ></div>
         </form> 
     </div>
     

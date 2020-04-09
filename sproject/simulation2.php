@@ -1,7 +1,7 @@
 <?php
     include 'connect.php';
-    $d = $conn->query("SELECT * FROM `question2`");
-    $d2 = $conn->query("SELECT id FROM `question2`");
+    $d = $conn->query("SELECT * FROM question2");
+    $d2 = $conn->query("SELECT id FROM question2");
     $s1 = $conn->query("SELECT s1 FROM score");
     $s2 = $conn->query("SELECT s2 FROM score");
     $s3 = $conn->query("SELECT s3 FROM score");
@@ -34,6 +34,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/simulation1.css" media="screen" />
+    
 	<style type="text/css">
 	body,html {padding:0; margin:0;width: 100%; height: 100%;
 	} 
@@ -44,16 +45,37 @@
       margin-bottom: 25px; 
       width: auto;
       min-width: 650px;
-      height: 900px;
-      min-height: 900px;
+      height: 1000px;
+      min-height: 1000px;
       background-color: #496e9c;
       clear: left;
       z-index: 2;
-      overflow:hidden;
+      overflow: auto;
     }
 
+    .time{
+        background: #496e9c;
+        color:#ffffff;
+        overflow: hidden;
+        z-index: 9999;
+        position: fixed;
+        padding:5px;
+        text-align:center;
+        width: 175px;
+        height: 22px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        }
+    .time.right_top{
+        right: 10px;
+        top: 10px;
+        }
+
+
 	</style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
 	<title>simulation</title>
 </head>
 <body onload="asd()">
@@ -92,10 +114,10 @@
     </div>
     <div align="center" class="button" style="color: white;">
         <form name="f" action="">
-        <input type="checkbox" name="aa" value="1">aa<br>
-        <input type="checkbox" name="aa" value="2">aa<br>
-        <input type="checkbox" name="aa" value="3">aa<br>
-        <input type="checkbox" name="aa" value="4" id="4444" style="display:none">aa<br>
+        <input type="checkbox" name="aa" value="1">a<br>
+        <input type="checkbox" name="aa" value="2">a<br>
+        <input type="checkbox" name="aa" value="3">a<br>
+        <input type="checkbox" name="aa" value="4" id="4444" style="display:none">a<br>
         <input type="button" id="a3" onclick="fff()" value="next questions">
         </form> 
     </div>
@@ -103,7 +125,7 @@
 </body>
 </html>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     var dd = 0;
 	//get userName
@@ -121,7 +143,6 @@
 
     var qq = document.getElementById("q");
     qq.innerHTML = r[0].q;
-
     var cc=document.getElementsByName("aa"); 
     cc[0].nextSibling.nodeValue = r[0].a1;
     cc[1].nextSibling.nodeValue = r[0].a2;
