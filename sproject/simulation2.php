@@ -2,9 +2,8 @@
     include 'connect.php';
     $d = $conn->query("SELECT * FROM question2");
     $d2 = $conn->query("SELECT id FROM question2");
-    $s1 = $conn->query("SELECT s1 FROM score");
-    $s2 = $conn->query("SELECT s2 FROM score");
-    $s3 = $conn->query("SELECT s3 FROM score");
+    $time = $conn->query("SELECT time FROM time WHERE id = 1");
+    $s = $conn->query("SELECT * FROM score");
 
     while ($rows= $d->fetch_assoc()) {
         $rowss[] = $rows;
@@ -14,16 +13,14 @@
         $rowid[] = $rows;
     }
 
-    while ($rows= $s1->fetch_assoc()) {
-        $row1[] = $rows;
+
+
+    while ($rows= $time->fetch_assoc()) {
+        $t = $rows["time"];
     }
 
-    while ($rows= $s2->fetch_assoc()) {
-        $row2[] = $rows;
-    }
-
-    while ($rows= $s3->fetch_assoc()) {
-        $row3[] = $rows;
+     while ($rows= $s->fetch_assoc()) {
+        $sr[] = $rows;
     }
 ?>
 
@@ -45,9 +42,9 @@
       margin-bottom: 25px; 
       width: auto;
       min-width: 650px;
-      height: 1000px;
-      min-height: 1000px;
-      background-color: #496e9c;
+      height: 800px;
+      min-height: 800px;
+      background-color: #03244d;
       clear: left;
       z-index: 2;
       overflow: auto;
@@ -107,37 +104,47 @@
             HR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;72 bpm<br>
             Wt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;148 lbs<br>
             Ht&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5'7"<br>
-            BMI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23.2 kg/m2<br><br><br>
+            BMI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23.2 kg/m2
         </div>
-        <div id="q" class="zxc1" align="center"> 
-        </div>
+        
     </div>
-    <div align="center" class="button" style="color: white;">
-        <form name="f" action="">
-        <input type="checkbox" name="aa" value="1">a<br>
-        <input type="checkbox" name="aa" value="2">a<br>
-        <input type="checkbox" name="aa" value="3">a<br>
-        <input type="checkbox" name="aa" value="4" id="4444" style="display:none">a<br>
-        <input type="button" id="a3" onclick="fff()" value="next questions">
-        </form> 
+    <div style="min-height: 250px;">
+        <div id="q" class="zxc1" align="center"> 
+            </div> <br><br><br>
+        <div align="center" class="button" style="color: white;">
+            <form name="f" action="">
+            <input type="checkbox" name="aa" value="1">a<br>
+            <input type="checkbox" name="aa" value="2">a<br>
+            <input type="checkbox" name="aa" value="3">a<br>
+            <input type="checkbox" name="aa" value="4" id="4444" style="display:none">a<br>
+            <input type="button" id="a3" onclick="fff()" value="next questions"
+            style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px">
+            </form> 
+        </div>
     </div>
     
 </body>
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
+<script type="text/javascript" charset="UTF-8">
+    
     var dd = 0;
+    var gs = 0;
+    var ccc = 0;
 	//get userName
 	var userName = sessionStorage.getItem('username');
 	// get the row of questions and answer
     var r = eval('<?php echo json_encode($rowss);?>');
     //get the score table from database
-    var s1 = eval('<?php echo json_encode($row1);?>');
-    var s2 = eval('<?php echo json_encode($row2);?>');
-    var s3 = eval('<?php echo json_encode($row3);?>');
-
     var id = eval('<?php echo json_encode($rowid);?>');
+
+    var an = eval('<?php echo json_encode($sr);?>');
+
+
+
+    var time2 = 0;
+    var time3 = "";
 
 
 
@@ -154,19 +161,51 @@
     }
 
     function fff() {
+        var length = 0;
+        var ss = 0;
+
+        var ar = new Array();
+        ar[0] = an[ccc].a1;
+        ar[1] = an[ccc].a2;
+        ar[2] = an[ccc].a3;
+        ar[3] = an[ccc].a4;
+
+       
+
         dd++;
+        ccc++;
+
+        for (var i=0; i < 4; i++)  {
+            if (cc[i].checked) {
+                if (ar.indexOf(cc[i].nextSibling.nodeValue) != -1) {
+                    ss++;
+                }
+                else {
+                    ss--;
+                }
+            }
+        }
+
+        
+
+        for (var i = 0; i < 4; i++) {
+            if (ar[i] != "null") {
+                length++;
+            }
+        }
+
+        if(ss == length) {
+            gs = gs + 10;
+        }
+
+
         var dl = id.length;
         if (dd == dl) {
-            alert("the simulation is end");
-            window.location.href='preSecond.php';
-        }
-
-        for (var i=0; i < cc.length; i++)  {
-            if (cc[i].checked) {
-
-            }
+            alert("the simulation is end1");
+            post('save2.php', {username:userName, score:gs, time:time3, progress:'complete'});
 
         }
+
         
         var d = id[dd].id - 1;
         
@@ -188,21 +227,29 @@
 
 
 
-    function asd(){   
-        var time=1800;
+    function asd(){ 
+        var t = eval('<?php echo json_encode($t);?>'); 
+        var time=t*60; 
+
         setInterval(function(){
+                
             if (time > 0) {
             time=time-1;
+            time2 = time2 + 1;
             var minute=parseInt(time/60);
             var second=parseInt(time%60);
-            sub.innerHTML= '00:'+toDub(minute)+':'+toDub(second);}
+            sub.innerHTML= '00:'+toDub(minute)+':'+toDub(second);
+
+            var minute2=parseInt(time2/60);
+            var second2=parseInt(time2%60);
+            time3 = '00:'+toDub(minute2)+':'+toDub(second2);}
 
             else {
                 alert("the simulation is end");
-                post('save2.php', {username:userName, score:s, progress:'incomplete'}); 
+                post('save2.php', {username:userName, score:gs, time:time3, progress:'incomplete'}); 
             }
         },1000);
-        
+
 
     }
 

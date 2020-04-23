@@ -1,8 +1,8 @@
 <?php
 	include 'connect.php';
-	$d = $conn->query("SELECT * FROM question2");
-	$d2 = $conn->query("SELECT id FROM question2");
-	$d3 = $conn->query("SELECT * FROM question2");
+	$d = $conn->query("SELECT * FROM score");
+	$d2 = $conn->query("SELECT id FROM score");
+	$d3 = $conn->query("SELECT * FROM score");
 	
 
 	while ($rows= $d->fetch_assoc()) {
@@ -57,11 +57,10 @@ display:none;
     </thead>
     <div class="">
 	<div id="Cusmoters" class="edit1">
-		<table border="1" style="margin-top:10px;margin-right: 10px; margin-left: 10px; border: white">
+		<table border="1" style="margin-top:10px;margin-right: 10px; margin-left: 10px; border: white; width: 100%;">
 		
 				<tr>
 					<th>id</th>
-					<th>question</th>
 					<th>answer1</th>
 					<th>answer2</th>
 					<th>answer3</th>
@@ -73,7 +72,6 @@ display:none;
 			while ($result = $d3->fetch_assoc()) {
 				echo "<tr>";
 				echo "<td>" . $result["id"] . "</td>";
-                echo "<td>" . $result["q"] . "</td>";
                 echo "<td>" . $result["a1"] . "</td>";
                 echo "<td>" . $result["a2"] . "</td>";
                 echo "<td>" . $result["a3"] . "</td>";
@@ -90,9 +88,6 @@ display:none;
 		<label>ID:&nbsp;&nbsp;&nbsp;</label><input type="text" name="" id="id" style="margin-bottom: 10px;margin-top: 10px;">
 
 		<input type="button" id="b1" value="search" onclick="search()"><br>
-
-		<label>question:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="q"  rows="4" cols="50" > </textarea> <br>
-
 
 		<label>answer1:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a1"  rows="4" cols="50" > </textarea> <br>
 		
@@ -121,7 +116,6 @@ display:none;
 	var rid = eval('<?php echo json_encode($rowid);?>');
 
 	var id = document.getElementById("id");
-	var q = document.getElementById("q");
 	var a1 = document.getElementById("a1");
 	var a2 = document.getElementById("a2");
 	var a3 = document.getElementById("a3");
@@ -133,7 +127,6 @@ display:none;
 		var idv = id.value;
 		if (rid.indexOf(idv) != -1) {
 			idv = idv -1;
-			q.value = r[idv].q
 			a1.value = r[idv].a1
 			a2.value = r[idv].a2
 			a3.value = r[idv].a3
@@ -157,15 +150,13 @@ display:none;
 
 		else {
 			var sid = id.value;
-			var sq = q.value;
 			var sa1 = a1.value;
 			var sa2 = a2.value;
 			var sa3 = a3.value;
 			var sa4 = a4.value;
 			
-			post('add.php',{
+			post('addBA1.php',{
 				id:sid,
-				q:sq,
 				a1:sa1,
 				a2:sa2,
 				a3:sa3,
@@ -179,15 +170,13 @@ display:none;
 		var idv = id.value;
 		if (rid.indexOf(idv) != -1) {
 			var sid = id.value;
-			var sq = q.value;
 			var sa1 = a1.value;
 			var sa2 = a2.value;
 			var sa3 = a3.value;
 			var sa4 = a4.value;
 		
-			post('edit.php',{
+			post('editBA1.php',{
 				id:sid,
-				q:sq,
 				a1:sa1,
 				a2:sa2,
 				a3:sa3,
@@ -205,7 +194,7 @@ display:none;
 		var idv = id.value;
 		if (rid.indexOf(idv) != -1) {
 			var sid = id.value;
-			post('delete.php',{
+			post('deleteBA1.php',{
 				id:sid,
 			});
 		}

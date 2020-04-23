@@ -6,7 +6,8 @@
 		$role = 'no';
 		$score = 0;
 		$progress = 'Incomplete';
-		$sql = "INSERT INTO login (usename, password, fullname, role, score,  progress) values ('{$suname}', '{$spassword}', '{$sfname}', '{$role}', '{$score}', '{$progress}')";	
+		$time = '00:00:00'
+		$sql = "INSERT INTO login (usename, password, fullname, role, score,  progress, time) values ('{$suname}', '{$spassword}', '{$sfname}', '{$role}', '{$score}', '{$progress}', '{$time}')";	
 		$conn->query($sql);
 
 		$url = "index.php";

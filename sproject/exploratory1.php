@@ -1,8 +1,8 @@
 <?php
 	include 'connect.php';
-	$d = $conn->query("SELECT * FROM question2");
-	$d2 = $conn->query("SELECT id FROM question2");
-	$d3 = $conn->query("SELECT * FROM question2");
+	$d = $conn->query("SELECT * FROM question");
+	$d2 = $conn->query("SELECT id FROM question");
+	$d3 = $conn->query("SELECT * FROM question");
 	
 
 	while ($rows= $d->fetch_assoc()) {
@@ -17,21 +17,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-    <meta charset="UTF-8">
 	
-	<link rel="stylesheet" type="text/css" href="css/admin1.css" media="screen"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<style type="text/css" >
-		body,html {padding:0; margin:0;width: 100%; height: 100%; color: white;
+	<style type="text/css">
+		body,html {padding:0; margin:0;width: 100%; height: 100%; color: white; background-color:#03244d; align-items: center;
+	}
+
+
+	.top{
+	  background-color: white ;
+	  background-size: cover;
+	  border-bottom: 2px solid #ee7700;
+	  width:100%;
+	  height: 65px;
+	  min-width: 950px;
+	  text-align: center;
 	}
 
 	.edit1{
 		background: #496e9c;
 		border: 1px solid white; 
 	    border-radius: 20px;
-	    width: 1000px;
+	    min-width: 1400px;
 	    height: 500px;
 	    margin-top: 120px; 
 	    margin-left: auto;
@@ -49,7 +55,6 @@ display:none;
 	<title>edit</title>
 </head>
 <body>
-
 	<thead>
 	<div class="top">
         <a href="admin.php"><img src="img/logi.jpeg" id= "img" alt="top" width="250" height="50" style="margin-top: 10px"></a>
@@ -65,19 +70,23 @@ display:none;
 					<th>answer1</th>
 					<th>answer2</th>
 					<th>answer3</th>
-					<th>answer4</th>
+					<th>answer1 id</th>
+					<th>answer2 id</th>
+					<th>answer3 id</th>
 				</tr>
 		</thead>	
 		<?php 
 		if ($d3->num_rows > 0) {
 			while ($result = $d3->fetch_assoc()) {
 				echo "<tr>";
-				echo "<td>" . $result["id"] . "</td>";
+				echo "<td>" . $result["ID"] . "</td>";
                 echo "<td>" . $result["q"] . "</td>";
                 echo "<td>" . $result["a1"] . "</td>";
                 echo "<td>" . $result["a2"] . "</td>";
                 echo "<td>" . $result["a3"] . "</td>";
-                echo "<td>" . $result["a4"] . "</td>";
+                echo "<td>" . $result["a1n"] . "</td>";
+                echo "<td>" . $result["a2n"] . "</td>";
+                echo "<td>" . $result["a3n"] . "</td>";
 				echo "</tr>";
 			}
 		}
@@ -100,7 +109,9 @@ display:none;
 		
 		<label>answer3:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a3"  rows="4" cols="50" > </textarea> <br>
 		
-		<label>answer4:&nbsp;&nbsp;&nbsp;</label><textarea value="" id="a4"  rows="4" cols="50" > </textarea> <br>
+		<label>a1n:&nbsp;&nbsp;&nbsp;</label><input type="text" name="" id="a1n"><br>
+		<label>a2n:&nbsp;&nbsp;&nbsp;</label><input type="text" name="" id="a2n"><br>
+		<label>a3n:&nbsp;&nbsp;&nbsp;</label><input type="text" name="" id="a3n"><br>
 		
 
 
@@ -116,7 +127,7 @@ display:none;
 </body>
 </html>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
 	var r = eval('<?php echo json_encode($rowss);?>');
 	var rid = eval('<?php echo json_encode($rowid);?>');
 
@@ -125,7 +136,9 @@ display:none;
 	var a1 = document.getElementById("a1");
 	var a2 = document.getElementById("a2");
 	var a3 = document.getElementById("a3");
-	var a4 = document.getElementById("a4");
+	var a1n = document.getElementById("a1n");
+	var a2n = document.getElementById("a2n");
+	var a3n = document.getElementById("a3n");
 
 
 
@@ -133,12 +146,14 @@ display:none;
 		var idv = id.value;
 		if (rid.indexOf(idv) != -1) {
 			idv = idv -1;
-			q.value = r[idv].q
-			a1.value = r[idv].a1
-			a2.value = r[idv].a2
-			a3.value = r[idv].a3
-			a4.value = r[idv].a4
-		
+			q.value = r[idv].q;
+			a1.value = r[idv].a1;
+			a2.value = r[idv].a2;
+			a3.value = r[idv].a3;
+			a1n.value = r[idv].a1n;
+			a2n.value = r[idv].a2n;
+			a3n.value = r[idv].a3n;
+
 		}
 
 		else {
@@ -161,15 +176,19 @@ display:none;
 			var sa1 = a1.value;
 			var sa2 = a2.value;
 			var sa3 = a3.value;
-			var sa4 = a4.value;
+			var sa1n = a1n.value;
+			var sa2n = a2n.value;
+			var sa3n = a3n.value;
 			
-			post('add.php',{
+			post('addexp1.php',{
 				id:sid,
 				q:sq,
 				a1:sa1,
 				a2:sa2,
 				a3:sa3,
-				a4:sa4,
+				a1n:sa1n,
+				a2n:sa2n,
+				a3n:sa3n,
 			
 			});
 		}
@@ -183,16 +202,20 @@ display:none;
 			var sa1 = a1.value;
 			var sa2 = a2.value;
 			var sa3 = a3.value;
-			var sa4 = a4.value;
+			var sa1n = a1n.value;
+			var sa2n = a2n.value;
+			var sa3n = a3n.value;
 		
-			post('edit.php',{
+			post('editexp1.php',{
 				id:sid,
 				q:sq,
 				a1:sa1,
 				a2:sa2,
 				a3:sa3,
-				a4:sa4,
-				
+				a1n:sa1n,
+				a2n:sa2n,
+				a3n:sa3n,
+			
 			});
 		}
 		else {
@@ -205,7 +228,7 @@ display:none;
 		var idv = id.value;
 		if (rid.indexOf(idv) != -1) {
 			var sid = id.value;
-			post('delete.php',{
+			post('deleteexp1.php',{
 				id:sid,
 			});
 		}
@@ -233,7 +256,8 @@ display:none;
         document.body.removeChild(temp)
         return temp
  	}
+
  	
 
+ 	
 </script>
-

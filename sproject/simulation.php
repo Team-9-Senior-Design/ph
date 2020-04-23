@@ -1,24 +1,15 @@
 <?php
     include 'connect.php';
     $d = $conn->query("SELECT * FROM `question`");
-    $s1 = $conn->query("SELECT s1 FROM score");
-    $s2 = $conn->query("SELECT s2 FROM score");
-    $s3 = $conn->query("SELECT s3 FROM score");
+    $time = $conn->query("SELECT time FROM time WHERE id = 2");
 
     while ($rows= $d->fetch_assoc()) {
         $rowss[] = $rows;
     }
 
-    while ($rows= $s1->fetch_assoc()) {
-        $row1[] = $rows;
-    }
 
-    while ($rows= $s2->fetch_assoc()) {
-        $row2[] = $rows;
-    }
-
-    while ($rows= $s3->fetch_assoc()) {
-        $row3[] = $rows;
+    while ($rows= $time->fetch_assoc()) {
+        $t = $rows["time"];
     }
 ?>
 
@@ -32,6 +23,20 @@
 	<style type="text/css">
 	body,html {padding:0; margin:0;width: 100%; height: 100%;
 	} 
+    .box {
+      margin-top: 70px;
+      margin-left:20%;
+      margin-right: 20%;
+      margin-bottom: 25px; 
+      width: auto;
+      min-width: 650px;
+      height: 800px;
+      min-height: 800px;
+      background-color: #03244d;
+      clear: left;
+      z-index: 2;
+      overflow:auto;
+    }
     .time{
         background: #496e9c;
         color:#ffffff;
@@ -83,30 +88,34 @@
             HR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;82 bpm<br>
             Wt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;232 lbs<br>
             Ht&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6’<br>
-            BMI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;31.5 kg/m2<br><br><br><br><br><br>
-        </div>
-        <div id="q" class="zxc1" align="center"> 
+            BMI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;31.5 kg/m2
         </div>
     </div>
-    <div align="center" class="button">
-        <form name="f" action="">
-        <div>
-        <input type="button" id="a1" onclick="c1()" value="" 
-                style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px"></div>
-        <div>
-        <input type="button" id="a2" onclick="c2()" value=""
+    <div style="min-height: 250px;">
+        <div id="q" class="zxc1" align="center"> </div> <br><br><br>
+    
+        <div align="center" class="button">
+            <form name="f" action="">
+            <div>
+            <input type="button" id="a1" onclick="c1()" value="" 
+                    style="background-color: #ee7700 ; color: #fff; width: auto;min-width: 100px"></div>
+            <div>
+            <input type="button" id="a2" onclick="c2()" value=""
+                    style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px;
+                        "></div>
+            <div >
+            <input type="button" id="a3" onclick="c3()" value="" 
                 style="background-color: #ee7700 ; color: #fff; width: auto; min-width: 100px;
-                    "></div>
-        <div >
-        <input type="button" id="a3" onclick="c3()" value="" ></div>
-        </form> 
+                        "></div>
+            </form> 
+        </div>
     </div>
     
 </body>
 </html>
 
 
-<script>
+<script type="text/javascript" charset="UTF-8">
 	//get userName
 	var userName = sessionStorage.getItem('username');
 	//this is score
@@ -114,9 +123,7 @@
 	// get the row of questions and answer
     var r = eval('<?php echo json_encode($rowss);?>');
     //get the score table from database
-    var s1 = eval('<?php echo json_encode($row1);?>');
-    var s2 = eval('<?php echo json_encode($row2);?>');
-    var s3 = eval('<?php echo json_encode($row3);?>');
+
 
     var qq = document.getElementById("q");
     qq.innerHTML = r[0].q;
@@ -137,25 +144,13 @@
     //reaction for button
     function c1() {
         var a1 = document.getElementById("a1").value;
-        
-        //calculate the score
-        if (s1.indexOf(a1) == -1) {
-        	s = s + 10;
-        }
 
-        if (s2.indexOf(a1) != -1) {
-        	s = s - 5;
-        }
-
-        if (s3.indexOf(a1) != -1) {
-        	s = s + 20;
-        }
 
         // stop the simulation
         if (r[id].a1n == 1111) {
         		alert("the simulation is end");
         		
-        		post('save2.php', {username:userName, score:s, progress:'complete'});
+        		post('save2.php', {username:userName,progress:'complete'});
         	}
         // set the next question and answer
         if (a1 == r[id].a1) {
@@ -187,23 +182,12 @@
         var a2 = document.getElementById("a2").value;
         
         //calculate the score
-        if (s1.indexOf(a1) == -1) {
-            s = s + 10;
-        }
-
-        if (s2.indexOf(a1) != -1) {
-            s = s - 5;
-        }
-
-        if (s3.indexOf(a1) != -1) {
-            s = s + 20;
-        }
 
         // stop the simulation
         if (r[id].a2n == 1111) {
                 alert("the simulation is end");
                 
-                post('save2.php', {username:userName, score:s, progress:'complete'});
+                post('save2.php', {username:userName,progress:'complete'});
             }
         // set the next question and answer
         if (a2 == r[id].a2) {
@@ -234,21 +218,10 @@
     function c3() {
         var a3 = document.getElementById("a3").value;
         //calculate the score
-        if (s1.indexOf(a3) != -1) {
-        	s = s + 10;
-        }
-
-        if (s2.indexOf(a3) != -1) {
-        	s = s - 5;
-        }
-
-        if (s3.indexOf(a3) != -1) {
-        	s = s + 20;
-        }
 
         if (r[id].a3n == 1111) {
         		alert("the simulation is end");
-        		post('save2.php', {username:userName, score:s, progress:'complete'});
+        		post('save2.php', {username:userName, progress:'complete'});
 
         		
         	}
@@ -276,7 +249,8 @@
     }
 
     function asd(){   
-        var time=1800;
+        var t = eval('<?php echo json_encode($t);?>');
+        var time=t*60; 
         setInterval(function(){
             if (time > 0) {
             time=time-1;
@@ -286,7 +260,7 @@
 
             else {
                 alert("the simulation is end");
-                post('save2.php', {username:userName, score:s, progress:'incomplete'}); 
+                post('save2.php', {username:userName, progress:'incomplete'}); 
             }
         },1000);
         
